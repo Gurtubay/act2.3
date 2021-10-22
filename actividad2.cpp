@@ -1,5 +1,3 @@
-
-
 #include "ListaDoble.hpp"
 #include "ListaDobleCircular.hpp"
 #include "bitacora.hpp"
@@ -35,7 +33,7 @@ int main(){
     do{
         
         Falla * datoFalla = new Falla (nodoPasadaB->getDato()->getFalla());
-        nombreFalla=fallas.buscarNodoT(datoFalla);
+        nombreFalla=fallas.buscarNodoT(datoFalla);//Tiene que recibir una clase
         if (nombreFalla)//Se busca el nodoFalla en la lista de fallas
         {
             fallas.buscarNodoT(datoFalla)->getDato()->agregarOcurrencia(); //Si existe, se obtiene la clase y se la llama a la funcion que agrega 1 a las ocurrencias
@@ -54,6 +52,7 @@ int main(){
     ofstream miConsulta("consulta.txt");
     do
     {
+        nombreFalla=nombreFalla->getSiguiente();//Cuidado con los nodos auxiliares
         if(nombreFalla->getDato()->getNombre()==tipoFalla)//
             cout<<"Numero de ocurrencias de la falla: "<<nombreFalla->getDato()->getOcurrencias(); 
             miConsulta<<"Falla: "<<tipoFalla<<"\n";
@@ -62,14 +61,29 @@ int main(){
 
     } while (tipoFalla!=nombreFalla->getDato()->getNombre());
     
+    int askHora;
+    string nuevaHora;
+    cout << "Ingrese la hora de la solicitud: " << endl;
+    cin >> askHora;
+    cout << endl;
+    nodoPasadaB=registro.getHead();
+    nuevaHora = nodoPasadaB->getDato()->getHora();
+    nuevaHora = nuevaHora.erase(2,6);
+    ifstream miConsulta2("miConsulta2.txt");
+    do
+    {
+        if(nuevaHora == askHora)
+            nodoPasadaB->getDato()->imprimirRegistro();
+        nodoPasadaB=nodoPasadaB->getSiguiente();//Cuidado con los nodos auxiliares
+    } while (nodoPasadaB!=registro.getHead());
     
-    //Hacer otra lista Doble Cirular con en nombre de las fallas sin repetir y el numero de sucesos
-    //Hacer clase falla en otro documento .hpp
-    //Solicite al usuario el tipo de falla y muestre el número de ocurrencias totales
-    //y la información del número de ocurrencias divididos por mes. 
-    //Almacenar en un archivo el resultado de la consulta anterior
-
-    //Cuando se le solicite al usuario la hora, se debera obtener el atributo hora de cada objeto de cada nodo 
-    //de la lista doble circular, y posteriormente utilizar string.remove(3,6) para quedarse unicamente con la hora
+    //Posibles errores
+    //1- CUIDADO CON LOS NODOS AUXILIARES
+    //2- Operadores de memoria . y ->
+    //3- Corregir la comparacion en la linea 74 if(nuevaHora == askHora), convertir entero a string
+    //4- VERIFICAR INICIALIZACIONES DE VARIABLES APUNTADAS
+    //5- Especificar complejidad de bloques en terminos de BIG O()
+    //6- Agregar y escribir un nuevo archivo txt con la consulta correspondiente a la hora
+    //7- Docs
     return 0;
 }
