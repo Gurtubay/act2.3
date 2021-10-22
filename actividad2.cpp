@@ -1,18 +1,16 @@
-//#ifndef ABC
-//#define ABC
 
+
+#include "ListaDoble.hpp"
 #include "ListaDobleCircular.hpp"
 #include "bitacora.hpp"
 #include "Falla.hpp"
 //#include <iostream>
-#include <vector>
+//#include <vector>
 #include <fstream>
 #include <string>
 #include <algorithm> 
 using namespace std;
 
-
-template<typename T>
 
 int main(){
     //Hacemos una lista doble circular de clases Bitacora
@@ -31,44 +29,38 @@ int main(){
     datos.close();//Se cierra el archivo
     
     //Segunda lista doble circular con las fallas y ocurrencias
-    string nombreFalla;//Nueva variable
-    ListaDobleCircular<Falla *> fallas;//Se crea una segunda lista doble circular con apuntadores de clase falla
-    NodoD<T> * nodoFalla = new NodoD<T>();//Se crea un nuevo nodo en el heap
-    nodoFalla->setDato(Falla (registro.getHead()->getDato()->getFalla())); //Se mete el primer objeto de falla en el nodo basado en el head de la lista con la bitacora
-    fallas.agregarInicio(nodoFalla);//Se mete el primer nodo en la lista de fallas
-    NodoD<T> * nodoPasada = new NodoD<T>();//Se inicializa nuevo nodo para la lectura de lista registro
-    nodoPasada=registro.head();//El nodo pasada sera igual al nodo del head de registro
-    do
-    {
-        //nodoFalla=registro.leerLista(*nodoFalla);//Paso por apuntador para ir comparando valores
-        nombreFalla = registro.leerLista(*nodoPasada)->getDato()->getFalla();//Se actualiza el nombre de la falla siguiente de la lista de registros
-        nodoFalla->setDato(Falla(nombreFalla));//Se actualiza el nodo falla con el siguiente valor de la lectura de registro
-        //?????? Nodo Falla = Nodo Bitacora?????
-        if (fallas.buscarNodoT(nodoFalla))//Se busca el nodoFalla en la lista de fallas
+    NodoD<Falla *> * nombreFalla;//Nueva variable
+    ListaDoble<Falla *> fallas;//Se crea una lista doble con apuntadores de clase falla
+    NodoD<Bitacora *> * nodoPasadaB= new NodoD<Bitacora*>(registro.getHead()->getDato(),registro.getHead()->getSiguiente(),registro.getHead()->getAnterior()); 
+    do{
+        
+        Falla * datoFalla = new Falla (nodoPasadaB->getDato()->getFalla());
+        nombreFalla=fallas.buscarNodoT(datoFalla);
+        if (nombreFalla)//Se busca el nodoFalla en la lista de fallas
         {
-            nodoFalla->getDato()->agregarOcurrencia(); //Si existe, se obtiene la clase y se la llama a la funcion que agrega 1 a las ocurrencias
+            fallas.buscarNodoT(datoFalla)->getDato()->agregarOcurrencia(); //Si existe, se obtiene la clase y se la llama a la funcion que agrega 1 a las ocurrencias
         }
         else
-            fallas.agregarFinal(nodoFalla); //Si no existe se agrega el nodo completo al final 
-            nodoFalla->getDato()->setNombre(nombreFalla);//Se le pone el nombre de la falla para su posterior busqueda
-    } while(nodoPasada != registro.head->getAnterior());//While para que pase por todos los valores del registro
+            fallas.agregarFinal(datoFalla); //Si no existe se agrega el nodo completo al final 
+            nodoPasadaB=nodoPasadaB->getSiguiente();//Se le pone el nombre de la falla para su posterior busqueda
+    } while(nodoPasadaB != registro.getHead());//While para que pase por todos los valores del registro
 
+    
     string tipoFalla;//Inicializamos nueva variable tipo falla
     cout<<"Ingrese el tipo de falla: "<< endl;
     cin>>tipoFalla;//Aqui esta el input 
     cout << endl;
-    nodoPasada = fallas.getHead()->getAnterior();//Actualizamos el nodo pasada para que este en el ultimo elemento de la lista falas
+    nombreFalla = fallas.getHead();//Actualizamos el nodo pasada para que este en el ultimo elemento de la lista falas
     ofstream miConsulta("consulta.txt");
     do
     {
-        nodoFalla=fallas.leerLista(*nodoPasada);
-        if(nodoFalla->getDato()->getNombre()==tipoFalla)//
-            cout<<"Numero de ocurrencias de la falla: "<<nodoFalla->getDato()->getOcurrencias(); 
+        if(nombreFalla->getDato()->getNombre()==tipoFalla)//
+            cout<<"Numero de ocurrencias de la falla: "<<nombreFalla->getDato()->getOcurrencias(); 
             miConsulta<<"Falla: "<<tipoFalla<<"\n";
-            miConsulta<<"Ocurrencias: "<<nodoFalla->getDato()->getOcurrencias()<<endl;
+            miConsulta<<"Ocurrencias: "<<nombreFalla->getDato()->getOcurrencias()<<endl;
             miConsulta.close();
 
-    } while (tipoFalla!=nodoFalla()->getDato()->getNombre());
+    } while (tipoFalla!=nombreFalla->getDato()->getNombre());
     
     
     //Hacer otra lista Doble Cirular con en nombre de las fallas sin repetir y el numero de sucesos
@@ -76,5 +68,8 @@ int main(){
     //Solicite al usuario el tipo de falla y muestre el número de ocurrencias totales
     //y la información del número de ocurrencias divididos por mes. 
     //Almacenar en un archivo el resultado de la consulta anterior
+
+    //Cuando se le solicite al usuario la hora, se debera obtener el atributo hora de cada objeto de cada nodo 
+    //de la lista doble circular, y posteriormente utilizar string.remove(3,6) para quedarse unicamente con la hora
     return 0;
 }

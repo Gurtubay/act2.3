@@ -1,7 +1,11 @@
+#ifndef NODED
+#define NODED
+
 #include <iostream>
 using namespace std;
 
 template <typename T>//T va a almacenar el tipo de dato 
+
 class NodoD{
     private:
         T dato;
@@ -25,3 +29,5 @@ class NodoD{
         this->anterior=anterior;
     }
 };
+
+#endif

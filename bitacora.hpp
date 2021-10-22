@@ -18,7 +18,17 @@ class Bitacora{
         string getFalla(){return this->falla;}
         string getMes(){return this->mes;}
         void setMes(string mes){this->mes=mes;}
+        string getHora(){return this->hora;}
+        
         //Tarea
+        Bitacora(){
+            this->mes="";
+            this->dia="";
+            this->hora="";
+            this->ipp="";
+            this->falla="";
+            this->asignarClave();            
+        }
         Bitacora(string mes,string dia, string hora, string ipp,string falla){
             this->mes=mes;
             this->dia=dia;
