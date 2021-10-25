@@ -21,7 +21,11 @@ class Falla{
         void setNombre(string nombre){this->nombre=nombre;}
 
         int getOcurrencias(){return this->ocurrencias;}
-        void setOcurrecnias(int ocu){this->ocurrencias=ocu;}
+        void setOcurrencias(int ocu){this->ocurrencias=ocu;}
+
+        void imprimirFalla(){
+            cout << "Falla : " << this->nombre << endl;
+        }
 
 
 };
