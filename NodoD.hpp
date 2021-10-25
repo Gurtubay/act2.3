@@ -23,7 +23,7 @@ class NodoD{
     NodoD<T> * getAnterior(){return this->anterior;}
     void setAnterior(NodoD<T> * nodo){this->anterior=nodo;}
 
-    NodoD<T>(T dato, NodoD<T> * siguiente, NodoD<T> * anterior){
+    NodoD<T>(T dato, NodoD<T> * anterior, NodoD<T> * siguiente){
         this->dato=dato;
         this->siguiente=siguiente;
         this->anterior=anterior;

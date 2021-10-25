@@ -19,6 +19,7 @@ class ListaDoble{
         NodoD<T> * getHead(){
             return this->head;
         }
+        
         void agregarInicio(T dato){
             //Crear el nuevo nodo
             NodoD<T> * nuevo = new NodoD<T>(dato, nullptr, this->head);
@@ -58,6 +59,8 @@ class ListaDoble{
             }
             return nullptr;
         }
+
+
         void update(T dato, T n_dato){
             NodoD<T> * nodo = buscarNodoT(dato);//Buscamos el nodo
             if(nodo){//El nodo que buscamos sí está en la lista

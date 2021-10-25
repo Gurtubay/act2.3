@@ -13,6 +13,7 @@ class ListaDobleCircular{
         this->tam=0;
     }
 
+    
     NodoD<T> * getHead(){
         return this->head;
     }
@@ -44,6 +45,7 @@ class ListaDobleCircular{
             NodoD<T> * nuevo = new NodoD<T>(dato, nullptr, nullptr);
             nuevo->setSiguiente(nuevo); 
             nuevo->setAnterior(nuevo);
+            this->head=nuevo; 
         }
         this->tam++;
     }
