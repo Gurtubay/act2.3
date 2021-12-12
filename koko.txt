@@ -1,0 +1,164 @@
+create table CLIENTE
+drop tabla CLIENTE
+alter table cliente
+create table AUTos
+De Mayra Fernanda Camacho Rodríguez para todos:  03:46 PM
+maestra creo que no esta grabando
+De María del Carmen Jiménez Hernández para todos:  03:51 PM
+insert into cliente
+values ('10A','Angel Garcia', 'angel@itesm.mx','Calle a')
+alter table cliente
+add COLUMNS direccion varchar(20)
+De María del Carmen Jiménez Hernández para todos:  04:03 PM
+insert into cliente
+values ('30A','Arturo Delgado, 'arturo@itesm.mx','Calle z')
+update cliente
+set direccion = 'Avenida xxx'
+update cliente
+set direccion = 'Avenida yyy'
+where rfc = '30A'
+delete from cliente 
+where rfc ='30A';
+De Jair Josue Jimárez García para todos:  04:10 PM
+insert into autos 
+values(1721, 'Acura','Blanco', '10J')
+De Nadia Paola Ferro Gallegos para todos:  04:10 PM
+INSERT INTO auto 
+VALUES('1234', 'BMW', 'Negro', '10A')
+De Josué Bernardo Villegas Nuño para todos:  04:11 PM
+INSERT INTO autos 
+values(4846, 'Ford','Azul', '09F')
+De Gilberto André García Gaytán para todos:  04:14 PM
+cree que pueda mandar por el chat las líneas anteriores con los datos de los autos por favor?
+De María del Carmen Jiménez Hernández para todos:  04:16 PM
+create table AUTos
+(num_serie int primary key,
+ marca varchar(20),
+ color varchar(20),
+ cliente char(4)
+ )
+insert into cliente
+values ('10A','Angel Garcia', 'angel@itesm.mx','Calle a')
+alter table cliente
+add COLUMNS direccion varchar(20)
+insert into cliente
+values ('30A','Arturo Delgado, 'arturo@itesm.mx','Calle z')
+insert into autos
+values(1721, 'Acura','Blanco', '10A');
+INSERT INTO autos 
+VALUES(1234, 'BMW', 'Negro', '10A');
+INSERT INTO autos 
+values(4846, 'Ford','Azul', '20A');
+De María del Carmen Jiménez Hernández para todos:  04:24 PM
+create table Orden 
+(Numero int primary key, 
+ fecha date,
+ tipo char(1),
+ mano int,
+ auto int
+ )
+De María del Carmen Jiménez Hernández para todos:  04:34 PM
+insert into orden
+values (1,'1/10/2021','G',3000,1234);
+insert into orden
+values (2,'1/10/2021','G',2000,4846);
+insert into orden
+values (3,'15/10/2021','C',1000,1721);
+insert into orden
+values (4,'30/10/2021','C',1500,1234;
+insert into orden
+values (1,'2021/10/1','G',3000,1234);
+insert into orden
+values (2,'2021/10/1','G',2000,4846);
+insert into orden
+values (3,'2021/10/15','C',1000,1721);
+insert into orden
+values (4,'20021/10/30','C',1500,1234;
+De Gilberto André García Gaytán para todos:  04:36 PM
+creo que las líneas se están mandando solo a karla miss
+De María del Carmen Jiménez Hernández para todos:  04:36 PM
+insert into orden
+values (1,'2021/10/1','G',3000,1234);
+insert into orden
+values (2,'2021/10/1','G',2000,4846);
+insert into orden
+values (3,'2021/10/15','C',1000,1721);
+insert into orden
+values (4,'20021/10/30','C',1500,1234);
+De María del Carmen Jiménez Hernández para todos:  04:44 PM
+SELECT cliente.nombre, orden.numero,autos.marca
+from cliente, autos, orden
+where autos.cliente = cliente.rfc and orden.auto = autos.num_serie
+create table refacciones
+De María del Carmen Jiménez Hernández para todos:  03:34 PM
+create table OrdenDetalle
+(orden int ,
+ refaccion int ,
+ cantidad int ,
+ constraint ordendetalle_pk primary key(orden,refaccion),
+ constraint ordendetalle_fk_orden  foreign key(orden) REFERENCES orden(numero),
+ constraint ordendetalle_fk_refac  FOREIGN key(refaccion) REFERENCES refacciones(clave)
+ )
+De Mayra Fernanda Camacho Rodríguez para todos:  03:41 PM
+#1005 - No puedo crear tabla `taller1`.`ordendetalle` (Error: 150 "Foreign key constraint is incorrectly formed") (Detalles…) Maestra me sale esto D:
+De Ana Patricia Islas Mainou para todos:  03:42 PM
+hacerlo por DDL es bien bonito, te ahorras errores de click
+De mí para todos:  03:48 PM
+checa como tienes guardado lo pk en las otras tablas
+(123, 'Disco', 6500, 47);
+De Nadia Paola Ferro Gallegos para todos:  03:48 PM
+INSERT INTO refacciones VALUES(147, ' Amortiguadores', 1000, 150);
+De María del Carmen Jiménez Hernández para todos:  03:49 PM
+insert into refacciones
+values(100,'Balatas',800,120);
+insert into refacciones
+values (123, 'Disco', 6500, 47);
+INSERT INTO refacciones 
+VALUES(147, ' Amortiguadores', 1000, 150);
+INSERT INTO refacciones 
+VALUES(110, ' Bujías', 120, 100);
+De Gilberto André García Gaytán para todos:  04:03 PM
+create table refacciones
+(clave int,
+ nombre varchar(20) NOT NULL,
+ precio int,
+ existencia int,
+ CONSTRAINT refacc_pk primary key(clave)
+ )
+De María del Carmen Jiménez Hernández para todos:  04:12 PM
+SELECT o.auto, o.fecha, o.tipo
+from refacciones r,ordendetalle d,orden o
+where d.orden= o.numero and d.refaccion = r.clave
+SELECT o.auto, o.fecha, o.tipo
+from refacciones r,ordendetalle d,orden o
+where d.orden= o.numero and d.refaccion = r.clave AND r.nombre like 'Bala%'
+De Angel Garcia para todos:  04:13 PM
+select c.nombre
+from refacciones r, ordendetalle d, orden o, cliente c, autos a
+where d.orden = o.Numero and d.refaccion = r.clave and r.nombre like 'Bala%' and o.auto = a.num_serie and a.cliente = c.rfc
+De Ana Patricia Islas Mainou para todos:  04:21 PM
+profesora... yo tengo una duda de las bases de datos del reto..
+De mí para María del Carmen Jiménez Hernández::  (Mensaje directo) 04:22 PM
+select d.refaccion, r.precio
+from refacciones r, ordendetalle, d
+where d.refaccion = r.clave
+De Jair Josue Jimárez García para todos:  04:23 PM
+SELECT od.Orden, r.Clave, r.Nombre, od.Cantidad, od.Cantidad * r.Precio as Total
+FROM refacciones r, ordendetalle od
+WHERE r.Clave = od.Refaccion
+De Jorge Rojas Rivas A01745334 para todos:  04:35 PM
+SELECT dayname(fecha), fecha, Numero, auto
+from orden
+where dayname(fecha)='Friday'
+De Ana Patricia Islas Mainou para todos:  04:36 PM
+select dayname(fecha), fecha, Numero, auto
+from orden
+where dayname(fecha) = viernes,
+select dayname(fecha), fecha, Numero, auto
+from orden
+where dayname(fecha) = "Friday"
+create view Balatas AS
+(
+select c.nombre as Nombre
+from refacciones r, ordendetalle d, orden o, cliente c, autos a
+where d.orden = o.Numero and d.refaccion = r.clave and r.nombre like 'Bala%' and o.auto = a.num_serie and a.cliente = c.rfc)
